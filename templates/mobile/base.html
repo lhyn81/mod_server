@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+
+<!-- ***************************************************************** -->
+<!-- ****************************** HEAD ***************************** -->
+<!-- ***************************************************************** -->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" style="z-index:1000" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <!-- <link rel="stylesheet" type="text/css" href="./css/api.css" />-->
+    <!-- <script src="./script/api.js"></script> -->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+    <!-- <script src="static/js/mobile/myjs.js"></script> -->
+
+
+</head>
+
+<!-- ***************************************************************** -->
+<!-- ****************************** BODY ***************************** -->
+<!-- ***************************************************************** -->
+
+<body>
+
+<!-- ****************************** PAGE_HOME ***************************** -->
+
+      <div data-role="page" id="page_home">
+
+<!-- ****************************** HEADER ***************************** -->
+
+        <div data-role="header" data-theme="b" data-position="fixed" data-tap-toggle="false">
+          <a href="#" data-role="button" data-icon="back" data-iconpos="notext"></a>
+          <h1>电力哈佛</h1>
+          <a href="#" data-role="button" data-icon="info" data-iconpos="notext"> </a>
+        </div>
+
+<!-- ****************************** CONTENT HOME ***************************** -->
+
+        <div align="center" data-role="content" id="content_home">
+          <div><img src ="static/image/logo.jpg" align="center" width="100" height="100"></div>
+          <p>宗旨</p>
+          <p align="left">电力哈佛APP致力于搭建一个开放式电力行业设计计算平台，集电力、热能、环保等内容，将行业常用设计和计算需求模块化，方便
+          设计和研发人员直接调用。</p>
+          <form method="post" action="#">
+            <div data-role="fieldcontain">
+            <input type="search" name="search" id="search" placeholder="输入算法关键词">
+            <a href="#" data-role="button" data-inline="true" data-mini="true">查询算法</a>
+            </div>
+          </form> 
+          <hr>
+            <a href="#" onclick="showmodlist()" data-role="button" data-inline="true" data-mini="true">查看当前算法列表</a>
+        </div>
+
+<!-- ****************************** CONTENT LOAD ***************************** -->
+
+        <div align="center" data-role="content" id="content_mod">
+          There is an error if this page appears.
+        </div>
+
+<!-- ****************************** CONTENT MODLIST ***************************** -->
+
+        <div data-role="content" id="content_modlist">
+          <div>
+            <div data-role="collapsible">
+              <h1>通用计算模块</h1>
+              <ul data-role="listview" data-inset="true">
+                <li><a href="#" onclick="testajax()">水蒸气物性参数计算</a></li>
+              </ul>
+            </div>
+            <div data-role="collapsible">
+              <h1>常用设备设计模块</h1>
+              <ul data-role="listview" data-inset="true">
+                <li><a href="#" onclick="#">旋风分离器设计</a></li>
+              </ul>
+            </div>
+            <div data-role="collapsible">
+              <h1>常用工艺过程计算</h1>
+              <ul data-role="listview" data-inset="true">
+                <li><a href="#" onclick="#">生物质气化产物计算</a></li>
+                <li><a href="#" onclick="#">生物质原料计算</a></li>
+                <li><a href="#" onclick="#">废弃物焚烧计算</a></li>
+              </ul>
+            </div>
+            <div data-role="collapsible">
+              <h1>非标工艺计算</h1>
+              <ul data-role="listview" data-inset="true">
+                <li><a href="#" onclick="#">待定</a></li>
+              </ul>
+            </div>
+            <div data-role="collapsible">
+              <h1>我要定制</h1>
+              <p>用户可以定制以下类型算法：燃烧、气化、热解等算法，请填写定制需求</p>
+              <button>我要提交</button>
+            </div>
+          </div>
+        </div>
+
+<!-- ****************************** FOOTER ***************************** -->
+
+        <div data-role="footer" data-theme="b" data-position="fixed">
+          <div data-role="navbar" id="footbar">
+            <ul>
+              <li><a href="#" onclick="gohome()" data-icon="home">首页</a></li>
+              <li><a href="#" data-icon="star">发现</a></li>
+              <li><a href="#" data-icon="grid">我的</a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+<!-- ****************************** SCRIPT ***************************** -->
+<script type="text/javascript">
+  
+$(document).ready(function() {
+  gohome();
+});
+
+function gohome(){
+  $("div[data-role='content']").hide();
+  $("#content_home").show();
+}
+
+function showmodlist(){
+  $("div[data-role='content']").hide();
+  $("#content_modlist").show();
+}
+
+function test(){
+  $("#content_mod").load("/mobile/test");
+  // $("#footbar").html("<ul>"+
+  //     "<li><a href='#' onclick='gohome()' data-icon='home'>首页</a></li>"+
+  //     "<li><a href='#' data-icon='star'>发现</a></li>"+
+  //     "<li><a href='#' data-icon='grid'>我的</a></li>"+
+  //     "</ul>"
+  //   );
+  $("div[data-role='content']").hide();
+  $("#content_mod").show();
+}
+
+function testajax(){
+  $.ajax({  
+            url : "/mobile/test",  
+            cache : false,  
+            async : false,
+            success : function(html) {  
+                $("#content_mod").html(html);  
+            }  
+        });  
+  $("div[data-role='content']").hide();
+  $("#content_mod").show();
+  // $("#cg > a").button();
+  $("#cg").buttonMarkup();
+  }
+
+function showinfo(){
+  $("#div_info").show();
+  $("#div_input").hide();
+  $("#div_rlt").hide();
+}
+
+function showinput(){
+  $("#div_info").hide();
+  $("#div_input").show();
+  $("#div_rlt").hide();
+}
+
+function showrlt(){
+  $("#div_info").hide();
+  $("#div_input").hide();
+  $("#div_rlt").show();
+}
+
+</script>
+
+</body>
+
+</html>

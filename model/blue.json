@@ -909,7 +909,7 @@
       "modID": "steam",
       "modLv": "free",
       "modName": "水蒸气参数查询",
-      "modGroup": "设计工具集",
+      "modGroup": "通用模型库",
       "modType": "normal",
       "modInfo": "水蒸汽计算模块描述",
       "modCalculator": "mody_steam",

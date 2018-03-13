@@ -8,21 +8,23 @@ from model.utils import export_docx
 from model.blue import modGroup, modItems 
 from flaskext.markdown import Markdown
 from flask_debugtoolbar import DebugToolbarExtension
+from flask_cors import *
 import json
+import xlrd
 
 
 app = Flask(__name__)
+CORS(app,supports_credentials=True)
 app.debug = True
 Markdown(app)
+
+
+#--------------------电脑端---------------------------
 
 # Show the main page, and load sidebar menus from blue
 @app.route('/')
 def index():
     return render_template("home.html",groupinfo=modGroup,modinfo=modItems)
-    # if 'user' in session:
-    #     return session['user']
-    # else:
-    #     return "not login"
 
 # Show the specified module page in the same format and style. Display the module information
 # and make ajax link pointing to the do/name page, which is the real calculation.
@@ -74,7 +76,34 @@ def download(fn):
     filename = 'static/results/'+fn
     return send_file(filename, as_attachment=True)
 
+#--------------------移动端---------------------------
+
+@app.route('/mobile')
+def mobile_index():
+    return render_template("mobile/base.html")
+
+@app.route('/mobile/login')
+def mobile_login():
+    pass
+
+@app.route('/mobile/show/<mod_name>')
+def mobile_show(mod_name):
+    # if mod_name=="steam":
+    rlt = modItems[mod_name]
+    return jsonify(rlt)
+
+@app.route('/mobile/do/<mod_name>')
+def mobile_do(mod_name):
+    pass
+
+@app.route('/mobile/test')
+def mobile_test():
+    return render_template("mobile/content.html")
+
+#--------------------主程序---------------------------
+
 if __name__ == '__main__':
     app.secret_key="19811015"
-    toolbar = DebugToolbarExtension(app)
+    # toolbar = DebugToolbarExtension(app)
+
     app.run(host='0.0.0.0', port=5000, debug=True)
