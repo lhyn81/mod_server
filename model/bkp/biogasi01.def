@@ -1,9 +1,0 @@
-INPUT: biogasi01.inm
-MODNAME: apmain
-RUNID: biogasi01
-NEW_RUNID: biogasi01
-OLD_RUNID: biogasi01
-PDF: biogasi01.appdf
-USERNAME: LH
-XMOD: C:\Program Files (x86)\AspenTech\Aspen Plus 11.1\Engine\xeq\apmain
-SPONLY:
