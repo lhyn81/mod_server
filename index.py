@@ -69,7 +69,6 @@ def do(mod_name):
         rlt = jsonify(rlt)
         return rlt
 
-
 # For VIP user to download the report.
 @app.route('/download/<fn>')
 def download(fn):
